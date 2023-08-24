@@ -1,10 +1,16 @@
 package com.example.blog.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
 @Table(name = "post")
+@NoArgsConstructor
+@RequiredArgsConstructor
+@Getter
+@Setter
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,46 +18,27 @@ public class Post {
     private Long id;
 
     @Column(name = "title")
+    @NonNull
     private String title;
 
     @Column(name = "body")
+    @NonNull
     private String body;
 
     @Column(name = "date")
+    @NonNull
     private Date dateCreated;
 
-    public Post() {
-    }
+    @ManyToOne
+    private User creator;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getBody() {
-        return body;
-    }
-
-    public void setBody(String body) {
-        this.body = body;
-    }
-
-    public Date getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Date dateCreated) {
-        this.dateCreated = dateCreated;
+    @Override
+    public String toString() {
+        return "Post{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", body='" + body + '\'' +
+                ", dateCreated=" + dateCreated +
+                '}';
     }
 }

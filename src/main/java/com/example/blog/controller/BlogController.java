@@ -34,6 +34,7 @@ public class BlogController {
     }
     @PostMapping("/post")
     public void publishPost(@RequestBody Post post){
+
         if(post.getDateCreated() == null) post.setDateCreated(new Date());
         postService.insert(post);
     }
